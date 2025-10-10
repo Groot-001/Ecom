@@ -168,7 +168,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
           className={`font-semibold text-white ${isSidebarOpen ? 'block' : 'hidden'
             }`}
         >
-          Charity Sewa
+          Maya ra Masla
         </h2>
         <div className="flex justify-center items-center">
           <div
