@@ -1,10 +1,11 @@
-import PersonTable from "@/app/components/table/PersonTable";
+import React from 'react';
 
-export default function AdminPage() {
+const page = () => {
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-semibold mb-4">User Management</h1>
-      <PersonTable />
+    <div>
+      admin dashboard
     </div>
   );
 }
+
+export default page;
