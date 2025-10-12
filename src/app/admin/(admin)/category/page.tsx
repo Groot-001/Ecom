@@ -8,6 +8,7 @@ import CategoryForm from "./partial/CategoryForm";
 export default function AdminPage() {
   const [query, setQuery] = useState<string>("");
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] = useState<boolean>(false)
+  const [isEditCategoryOpen, setIsEditCategoryOpen] = useState<boolean>(false)
 
   return (
     <div>
@@ -20,10 +21,11 @@ export default function AdminPage() {
       />
 
       <PersonTable />
-      
+
       <ModalWrapper isOpen={isCreateCategoryOpen} name="Create Category" onOpenChange={() => setIsCreateCategoryOpen(false)}>
         <CategoryForm />
       </ModalWrapper>
+      
     </div>
   );
 }

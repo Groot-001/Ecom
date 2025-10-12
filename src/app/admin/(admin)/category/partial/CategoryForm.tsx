@@ -11,6 +11,7 @@ const CategoryForm = () => {
       <form>
         <div>
           <InputText label='Category Name' name='category' />
+          <input type="text" placeholder='Description' />
           <Button className='mt-10' variant={'default'} onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault()
             formik.createCategoryFormik.handleSubmit()

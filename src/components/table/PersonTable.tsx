@@ -11,6 +11,10 @@ interface Category {
   description: string;
 }
 
+interface IProps {
+  
+}
+
 const data: Category[] = [
   {
     id: 1,
@@ -55,11 +59,17 @@ const columns: ColumnDef<Category>[] = [
     header: '⚙️ Actions',
     cell: () => (
       <div className="flex gap-3">
-        <button className="text-blue-600 hover:text-blue-800">
-          <Edit3 size={16} />
+        <button
+          onClick={() => { }}
+          className="text-blue-600 hover:text-blue-800">
+          <Edit3 size={16}
+          />
         </button>
-        <button className="text-red-600 hover:text-red-800">
-          <Trash2 size={16} />
+
+        <button
+          className="text-red-600 hover:text-red-800">
+          <Trash2 size={16}
+          />
         </button>
       </div>
     ),
