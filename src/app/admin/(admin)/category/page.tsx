@@ -98,7 +98,7 @@ export default function AdminPage() {
           setIsDeleteCategoryOpen(false)
           setdeleteId(null)
         }}
-        onDelete={()=>{}}
+        onDelete={() => { }}
       />
 
     </div>
