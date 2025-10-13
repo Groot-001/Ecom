@@ -1,9 +1,7 @@
 import { FormikProvider } from 'formik';
 import React from 'react';
 import { useCreateCategory } from '../hooks/useCreateCategory';
-import InputText from '@/components/forms/InputText';
 import { Button } from '@/components/ui/button';
-import InputTextArea from '@/components/forms/InputTextArea';
 import CategoryForm from './CategoryForm';
 
 const CreateCategoryForm = () => {

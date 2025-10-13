@@ -85,7 +85,8 @@ export default function AdminPage() {
 
       <ModalWrapper
         isOpen={isUpdateCategoryOpen}
-        name="Edit Category" onOpenChange={() => {
+        name="Edit Category"
+        onOpenChange={() => {
           setIsUpdateCategoryOpen(false)
           setUpdateId(null)
         }}>

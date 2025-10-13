@@ -1,11 +1,10 @@
 import { useFormik } from "formik"
 
-export const useDeleteCategory = () => {
+export const useCreateSubCategory = () => {
     const initialValues = {
         category: ""
     }
-
-    const deleteCategoryFormik = useFormik({
+    const createSubCategoryFormik = useFormik({
         initialValues,
         onSubmit: (values) => {
             console.log(values)
@@ -14,6 +13,6 @@ export const useDeleteCategory = () => {
 
 
     return {
-        deleteCategoryFormik
+        createSubCategoryFormik
     }
 }
