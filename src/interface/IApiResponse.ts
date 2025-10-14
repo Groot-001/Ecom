@@ -1,15 +1,22 @@
-// Response
-export interface IApiResponse {
+// ApiResponse
+export interface IApiResponse<T> {
   data?: {
     message: string;
     code: number;
-    errors: string;
+    success: boolean;
+    data: T;
   };
-  error?: {
+  error?: null | {
     data: {
       message: string;
       code: number;
-      errors: null;
+      success: boolean;
+      errors:
+        | null
+        | {
+            path: string;
+            message: string;
+          }[];
     };
   };
 }

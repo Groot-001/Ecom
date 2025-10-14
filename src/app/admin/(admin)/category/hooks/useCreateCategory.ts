@@ -9,6 +9,11 @@ interface IProps {
   closeModal: () => void;
 }
 
+interface ICreateCategory {
+  name: string;
+  description: string;
+}
+
 export const categorySchema = Yup.object().shape({
   name: Yup.string()
     .required("Name is required")
@@ -31,9 +36,9 @@ export const useCreateCategory = ({ closeModal }: IProps) => {
       const response = (await createCategory({
         url: endpoints.category.create,
         data: { ...values },
-      })) as IApiResponse;
+      })) as IApiResponse<ICreateCategory>;
       if (response?.data?.code === 201) {
-        showSuccessMessage(response?.data?.message || "Gand mey lele response");
+        showSuccessMessage(response?.data?.message || "");
         closeModal();
       }
     },

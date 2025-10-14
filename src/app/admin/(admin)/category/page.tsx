@@ -9,8 +9,11 @@ import { categoryData, ICategoryTable } from "./data/categoryData";
 import BaseTable from "@/components/table/BaseTable";
 import { Edit3, Trash2 } from "lucide-react";
 import AlertModal from "@/components/forms/AlertModel";
+import { useGetAllCategory } from "./hooks/useGetAllCategory";
 
 export default function AdminPage() {
+  const {} = useGetAllCategory()
+  
   const [query, setQuery] = useState<string>("");
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] =
     useState<boolean>(false);
