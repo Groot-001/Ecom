@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import AdminHeader from "@/common/adminheader/AdminHeader";
 import ModalWrapper from "@/components/wrapper/ModalWrapper";
 import { useState } from "react";
@@ -12,58 +12,62 @@ import AlertModal from "@/components/forms/AlertModel";
 
 export default function AdminPage() {
   const [query, setQuery] = useState<string>("");
-  const [isCreateCategoryOpen, setIsCreateCategoryOpen] = useState<boolean>(false)
-  const [isUpdateCategoryOpen, setIsUpdateCategoryOpen] = useState<boolean>(false)
-  const [updateId, setUpdateId] = useState<string | null>(null)
-  const [isDeleteCategoryOpen, setIsDeleteCategoryOpen] = useState<boolean>(false)
+  const [isCreateCategoryOpen, setIsCreateCategoryOpen] =
+    useState<boolean>(false);
+  const [isUpdateCategoryOpen, setIsUpdateCategoryOpen] =
+    useState<boolean>(false);
+  const [updateId, setUpdateId] = useState<string | null>(null);
+  const [isDeleteCategoryOpen, setIsDeleteCategoryOpen] =
+    useState<boolean>(false);
   const [deleteId, setdeleteId] = useState<string | null>(null);
 
   const columns: ColumnDef<ICategoryTable>[] = [
     {
-      accessorKey: 'id',
-      header: "Id"
+      accessorKey: "id",
+      header: "Id",
     },
     {
-      accessorKey: 'name',
-      header: 'Category',
+      accessorKey: "name",
+      header: "Category",
       cell: ({ row }) => (
-        <span className="font-medium text-gray-900">{row.getValue('name')}</span>
+        <span className="font-medium text-gray-900">
+          {row.getValue("name")}
+        </span>
       ),
     },
     {
-      accessorKey: 'description',
-      header: "Description"
+      accessorKey: "description",
+      header: "Description",
     },
     {
-      id: 'actions',
-      header: ' Actions',
+      id: "actions",
+      header: " Actions",
       cell: ({ row }) => (
         <div className="flex gap-3">
           <button
             onClick={() => {
-              setIsUpdateCategoryOpen(true)
-              setUpdateId(row?.original?.id.toString())
+              setIsUpdateCategoryOpen(true);
+              setUpdateId(row?.original?.id.toString());
             }}
-            className="text-blue-600 hover:text-blue-800">
-            <Edit3 size={16}
-            />
+            className="text-blue-600 hover:text-blue-800"
+          >
+            <Edit3 size={16} />
           </button>
 
           <button
             onClick={() => {
-              setIsDeleteCategoryOpen(true)
-              setdeleteId(row?.original?.id.toString())
+              setIsDeleteCategoryOpen(true);
+              setdeleteId(row?.original?.id.toString());
             }}
-            className="text-red-600 hover:text-red-800">
-            <Trash2 size={16}
-            />
+            className="text-red-600 hover:text-red-800"
+          >
+            <Trash2 size={16} />
           </button>
         </div>
       ),
     },
   ];
   return (
-
     <div>
       <AdminHeader
         query={query}
@@ -78,8 +82,12 @@ export default function AdminPage() {
       <ModalWrapper
         isOpen={isCreateCategoryOpen}
         name="Create Category"
-        onOpenChange={() => setIsCreateCategoryOpen(false)}>
+        onOpenChange={() => setIsCreateCategoryOpen(false)}
+      >
         <CreateCategoryForm
+          closeModal={() => {
+            setIsCreateCategoryOpen(false);
+          }}
         />
       </ModalWrapper>
 
@@ -87,21 +95,21 @@ export default function AdminPage() {
         isOpen={isUpdateCategoryOpen}
         name="Edit Category"
         onOpenChange={() => {
-          setIsUpdateCategoryOpen(false)
-          setUpdateId(null)
-        }}>
+          setIsUpdateCategoryOpen(false);
+          setUpdateId(null);
+        }}
+      >
         <EditCategoryForm />
       </ModalWrapper>
 
       <AlertModal
         isOpen={isDeleteCategoryOpen}
         onClose={() => {
-          setIsDeleteCategoryOpen(false)
-          setdeleteId(null)
+          setIsDeleteCategoryOpen(false);
+          setdeleteId(null);
         }}
-        onDelete={() => { }}
+        onDelete={() => {}}
       />
-
     </div>
   );
 }

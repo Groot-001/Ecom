@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { Provider } from "react-redux";
+import { store } from "@/store/store";
+import { ReduxProvider } from "@/components/wrapper/ReduxProvider";
 
 export const metadata: Metadata = {
   title: "Maya ra Masla ",
@@ -24,10 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body>
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );

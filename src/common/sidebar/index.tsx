@@ -1,40 +1,39 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import { IoChevronDownOutline, IoChevronForward } from 'react-icons/io5';
-import { mainMenuItems } from './Data/SidebarData';
-import { MenuItem } from './interface/sidebar_interface';
-import { SidebarProps } from '@/types/common';
-import { IoIosMenu } from 'react-icons/io';
-import { getActiveId } from './lib/getActiveId';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-
+"use client";
+import React, { useEffect, useState } from "react";
+import { IoChevronDownOutline, IoChevronForward } from "react-icons/io5";
+import { mainMenuItems } from "./Data/SidebarData";
+import { MenuItem } from "./interface/sidebar_interface";
+import { SidebarProps } from "@/types/common";
+import { IoIosMenu } from "react-icons/io";
+import { getActiveId } from "./lib/getActiveId";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
   const defaultOpenIds = [
-  ...mainMenuItems
-    .filter((item) => item.active)
-    .map((item) => item.id)
-    .filter((item: any) => item.active)
-    .map((item: any) => item.id),
-];  
-    const pathname = usePathname()
-    const [openDropdowns, setOpenDropdowns] = useState<string[]>(defaultOpenIds);
-    const [hoveredParenId, setHoveredParentId] = useState<string | null>(null);
-    const [hoveredChildId, setHoveredChildId] = useState<string | null>(null);
-    const [activeParentId, setActiveParentId] = useState<string | null>(getActiveId(mainMenuItems, window.location.pathname) || null);
-    const toggleDropdown = (id: string) => {
-        setOpenDropdowns((prev) =>
-            prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    ...mainMenuItems
+      .filter((item) => item.active)
+      .map((item) => item.id)
+      .filter((item: any) => item.active)
+      .map((item: any) => item.id),
+  ];
+  const pathname = usePathname();
+  const [openDropdowns, setOpenDropdowns] = useState<string[]>(defaultOpenIds);
+  const [hoveredParenId, setHoveredParentId] = useState<string | null>(null);
+  const [hoveredChildId, setHoveredChildId] = useState<string | null>(null);
+  const [activeParentId, setActiveParentId] = useState<string | null>(
+    getActiveId(mainMenuItems, " ") || null
+  );
+  const toggleDropdown = (id: string) => {
+    setOpenDropdowns((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
-};
+  };
   useEffect(() => {
     if (pathname) {
       setActiveParentId(getActiveId(mainMenuItems, pathname) || null);
     }
   }, [pathname]);
-
-
 
   const renderMenuItems = (
     items: MenuItem[],
@@ -62,13 +61,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
             }
           }}
         >
-          <Link 
-            href={item.link ?? '#'}
-            className={`flex items-center justify-between px-3 ${level === 0 || level === 1 ? 'py-3 mb-1' : 'py-2'
-              } rounded-xl cursor-pointer transition-colors ${isActive
-                ? 'bg-secondary-400 text-white'
-                : 'text-white hover:bg-secondary-500'
-              }`}
+          <Link
+            href={item.link ?? "#"}
+            className={`flex items-center justify-between px-3 ${
+              level === 0 || level === 1 ? "py-3 mb-1" : "py-2"
+            } rounded-xl cursor-pointer transition-colors ${
+              isActive
+                ? "bg-secondary-400 text-white"
+                : "text-white hover:bg-secondary-500"
+            }`}
             onClick={() =>
               (hasChildren && isSidebarOpen && toggleDropdown(item.id)) ||
               setActiveParentId(item.id)
@@ -78,8 +79,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
             <div className="flex items-center gap-3">
               {item.icon && <item.icon className="w-5 h-5" />}
               <span
-                className={`font-[400] text-text-main text-sm ${isSidebarOpen ? 'block' : 'hidden'
-                  }`}
+                className={`font-[400] text-text-main text-sm ${
+                  isSidebarOpen ? "block" : "hidden"
+                }`}
               >
                 {item.label}
               </span>
@@ -96,7 +98,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
           </Link>
 
           {hasChildren && isSidebarOpen && isOpen && (
-            <div className={`${level === 0 ? 'space-y-1' : 'space-y-1'}`}>
+            <div className={`${level === 0 ? "space-y-1" : "space-y-1"}`}>
               {renderMenuItems(item.children!, level + 1)}
             </div>
           )}
@@ -131,7 +133,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
                     {(child.children?.length ?? 0) > 0 && isHoveredChild && (
                       <div className="top-0 left-full z-50 absolute bg-white shadow-lg ml-[0.6] py-2 rounded-lg w-48">
                         {child?.children?.map((nestedChild, nestedIdx) => (
-                          <Link href={nestedChild.link ?? '#'} key={nestedIdx}>
+                          <Link href={nestedChild.link ?? "#"} key={nestedIdx}>
                             <div className="hover:bg-secondary-50 px-4 py-2 font-[400] text-text-main text-sm cursor-pointer">
                               <span>{nestedChild.label}</span>
                             </div>
@@ -157,16 +159,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
 
   return (
     <div
-      className={`hidden md:relative md:block bg-amber-500 p-4 pt-6 h-full font-medium no-scrollbar transition-all duration-300 ease-in-out shrink-0 ${isSidebarOpen ? 'w-64' : 'w-20'
-        } ${isSidebarOpen ? 'overflow-y-scroll scrollbar-hidden' : ''}`}
+      className={`hidden md:relative md:block bg-amber-500 p-4 pt-6 h-full font-medium no-scrollbar transition-all duration-300 ease-in-out shrink-0 ${
+        isSidebarOpen ? "w-64" : "w-20"
+      } ${isSidebarOpen ? "overflow-y-scroll scrollbar-hidden" : ""}`}
     >
       <div
-        className={`flex ${isSidebarOpen ? 'justify-between' : 'justify-center'
-          } items-center gap-20 pb-4`}
+        className={`flex ${
+          isSidebarOpen ? "justify-between" : "justify-center"
+        } items-center gap-20 pb-4`}
       >
         <h2
-          className={`font-semibold text-white ${isSidebarOpen ? 'block' : 'hidden'
-            }`}
+          className={`font-semibold text-white ${
+            isSidebarOpen ? "block" : "hidden"
+          }`}
         >
           Maya ra Masla
         </h2>
