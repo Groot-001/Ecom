@@ -1,26 +1,32 @@
 import { apiTag } from "@/constant/apiTag";
 import { endpoints } from "@/constant/endpoints";
+import { IPaginatedResponse } from "@/interface/IPaginatedResponse";
 import { useGetDataQuery } from "@/lib/api";
+import { useState } from "react";
 
-interface ICategory {
+export interface ICategoryItem {
   id: string;
   name: string;
   description: string;
 }
 
-interface IGetCategoryResponse {
-  message: string;
-  code: number;
-  success: boolean;
-  data: ICategory[];
-  errors: any | null;
-}
-
 export const useGetAllCategory = () => {
-  const {} = useGetDataQuery({
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(80);
+
+  const { data, isLoading, isError } = useGetDataQuery<{
+    data: IPaginatedResponse<ICategoryItem>;
+    isLoading: boolean;
+    isError: boolean;
+  }>({
     url: endpoints.category.list,
-    params: {},
+    params: { page: page, pageSize: pageSize },
     tag: apiTag.category.getAll,
   });
-  return;
+
+  return {
+    data,
+    isLoading,
+    isError,
+  };
 };

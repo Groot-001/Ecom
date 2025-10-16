@@ -5,15 +5,15 @@ import { useState } from "react";
 import CreateCategoryForm from "./partial/CreateCategoryForm";
 import EditCategoryForm from "./partial/EditCategoryForm";
 import { ColumnDef } from "@tanstack/react-table";
-import { categoryData, ICategoryTable } from "./data/categoryData";
 import BaseTable from "@/components/table/BaseTable";
 import { Edit3, Trash2 } from "lucide-react";
 import AlertModal from "@/components/forms/AlertModel";
-import { useGetAllCategory } from "./hooks/useGetAllCategory";
+import { ICategoryItem, useGetAllCategory } from "./hooks/useGetAllCategory";
+import LoadingScreen from "@/components/fallback/LoadingScreen";
 
 export default function AdminPage() {
-  const {} = useGetAllCategory()
-  
+  const { data, isLoading } = useGetAllCategory();
+
   const [query, setQuery] = useState<string>("");
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] =
     useState<boolean>(false);
@@ -24,7 +24,7 @@ export default function AdminPage() {
     useState<boolean>(false);
   const [deleteId, setdeleteId] = useState<string | null>(null);
 
-  const columns: ColumnDef<ICategoryTable>[] = [
+  const columns: ColumnDef<ICategoryItem>[] = [
     {
       accessorKey: "id",
       header: "Id",
@@ -80,7 +80,11 @@ export default function AdminPage() {
         setIsCategoryOpen={setIsCreateCategoryOpen}
       />
 
-      <BaseTable columns={columns} data={categoryData} />
+      {!isLoading ? (
+        <BaseTable columns={columns} data={data?.data.data || []} />
+      ) : (
+        <LoadingScreen />
+      )}
 
       <ModalWrapper
         isOpen={isCreateCategoryOpen}

@@ -1,3 +1,4 @@
+import { apiTag } from "@/constant/apiTag";
 import { endpoints } from "@/constant/endpoints";
 import { IApiResponse } from "@/interface/IApiResponse";
 import { usePostDataMutation } from "@/lib/api";
@@ -23,6 +24,7 @@ export const categorySchema = Yup.object().shape({
 
 export const useCreateCategory = ({ closeModal }: IProps) => {
   const [createCategory, { isLoading }] = usePostDataMutation();
+  // createCategory is a function that will send a post request and return a isLoading
 
   const initialValues = {
     name: "",
@@ -36,6 +38,7 @@ export const useCreateCategory = ({ closeModal }: IProps) => {
       const response = (await createCategory({
         url: endpoints.category.create,
         data: { ...values },
+        invalidateTag: [apiTag.category.getAll],
       })) as IApiResponse<ICreateCategory>;
       if (response?.data?.code === 201) {
         showSuccessMessage(response?.data?.message || "");
