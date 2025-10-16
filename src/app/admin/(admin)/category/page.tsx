@@ -12,10 +12,10 @@ import { ICategoryItem, useGetAllCategory } from "./hooks/useGetAllCategory";
 import LoadingScreen from "@/components/fallback/LoadingScreen";
 
 export default function AdminPage() {
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
+  const [page, setPage] = useState<number>(0);
+  const [pageSize, setPageSize] = useState<number>(5);
 
-  const { data, isLoading, totalPages } = useGetAllCategory(page, pageSize);
+  const { data, isLoading, totalPages } = useGetAllCategory({ page, pageSize });
 
   const [query, setQuery] = useState<string>("");
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] =

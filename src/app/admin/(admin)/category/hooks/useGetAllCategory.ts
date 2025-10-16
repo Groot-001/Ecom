@@ -10,8 +10,12 @@ export interface ICategoryItem {
   description: string;
 }
 
-export const useGetAllCategory = (page: number, pageSize: number) => {
+interface IPaginationParams {
+  page: number;
+  pageSize: number;
+}
 
+export const useGetAllCategory = ({ page, pageSize }: IPaginationParams) => {
   const { data, isLoading, isError } = useGetDataQuery<{
     data: IPaginatedResponse<ICategoryItem>;
     isLoading: boolean;
