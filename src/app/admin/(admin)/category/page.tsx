@@ -12,7 +12,10 @@ import { ICategoryItem, useGetAllCategory } from "./hooks/useGetAllCategory";
 import LoadingScreen from "@/components/fallback/LoadingScreen";
 
 export default function AdminPage() {
-  const { data, isLoading } = useGetAllCategory();
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
+
+  const { data, isLoading, totalPages } = useGetAllCategory(page, pageSize);
 
   const [query, setQuery] = useState<string>("");
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] =
@@ -81,7 +84,29 @@ export default function AdminPage() {
       />
 
       {!isLoading ? (
-        <BaseTable columns={columns} data={data?.data.data || []} />
+        <div>
+          <BaseTable columns={columns} data={data?.data.data || []} />
+          <div>
+            <button
+              onClick={() => setPage((p) => p - 1)}
+              disabled={page === 0}
+              className="bg-gray-200 px-4 py-2 rounded disabled:opacity-50"
+            >
+              Prev
+            </button>
+            <span>
+              Page {page + 1} of {totalPages}
+            </span>
+
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              disabled={page + 1 >= totalPages}
+              className="bg-gray-200 px-4 py-2 rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        </div>
       ) : (
         <LoadingScreen />
       )}

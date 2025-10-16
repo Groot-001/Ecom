@@ -53,7 +53,7 @@ export interface Links {
 
 const baseQuery = fetchBaseQuery({
   // baseUrl: process.env.NEXT_PUBLIC_BASE_API,
-  baseUrl: "http://192.168.254.11:8080/api",
+  baseUrl: "http://192.168.254.12:8080/api",
   prepareHeaders: (headers) => {
     const access = getCookie(COOKIE_CONFIG.access);
     if (access) {

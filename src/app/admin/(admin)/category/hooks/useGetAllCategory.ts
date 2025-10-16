@@ -10,9 +10,7 @@ export interface ICategoryItem {
   description: string;
 }
 
-export const useGetAllCategory = () => {
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(80);
+export const useGetAllCategory = (page: number, pageSize: number) => {
 
   const { data, isLoading, isError } = useGetDataQuery<{
     data: IPaginatedResponse<ICategoryItem>;
@@ -24,9 +22,13 @@ export const useGetAllCategory = () => {
     tag: apiTag.category.getAll,
   });
 
+  // const paginatedData = data?.data?.data ?? [];
+  const totalPages = data?.data?.totalPages ?? 1;
+
   return {
     data,
     isLoading,
     isError,
+    totalPages,
   };
 };
