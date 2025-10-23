@@ -52,8 +52,7 @@ export interface Links {
 }
 
 const baseQuery = fetchBaseQuery({
-  // baseUrl: process.env.NEXT_PUBLIC_BASE_API,
-  baseUrl: "https://spotty-melons-spend.loca.lt",
+  baseUrl: process.env.NEXT_PUBLIC_BASE_API,
   prepareHeaders: (headers) => {
     const access = getCookie(COOKIE_CONFIG.access);
     if (access) {
