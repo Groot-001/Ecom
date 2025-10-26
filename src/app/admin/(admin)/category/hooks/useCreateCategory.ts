@@ -39,6 +39,9 @@ export const useCreateCategory = ({ closeModal }: IProps) => {
         url: endpoints.category.create,
         data: { ...values },
         invalidateTag: [apiTag.category.getAll],
+        // invalidate tag tells that here we perform some operation i.e mutation, which perform some changes in the tag of useGetDataQuery()
+        // i.e [apiTag.category.getAll], so refetch them which the tag associated .
+        // so when we perform invalidate then it goes and perfrom the useGetDataQuery because it has the same tag and then refetch 
       })) as IApiResponse<ICreateCategory>;
       if (response?.data?.code === 201) {
         showSuccessMessage(response?.data?.message || "");

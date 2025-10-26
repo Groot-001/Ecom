@@ -17,6 +17,7 @@ interface IPaginationParams {
 
 export const useGetAllCategory = ({ page, pageSize }: IPaginationParams) => {
   const { data, isLoading, isError } = useGetDataQuery<{
+    // This sends a request to backend and get the response in redux under the key and associate that data with a tag that is : (some type and id)
     data: IPaginatedResponse<ICategoryItem>;
     isLoading: boolean;
     isError: boolean;
@@ -24,6 +25,7 @@ export const useGetAllCategory = ({ page, pageSize }: IPaginationParams) => {
     url: endpoints.category.list,
     params: { page: page, pageSize: pageSize },
     tag: apiTag.category.getAll,
+    // while fetching the data RTK Query itself provide some default tag for cache but we need to provide the tag ourself for some specific purpose like refetching.
   });
 
   // const paginatedData = data?.data?.data ?? [];
