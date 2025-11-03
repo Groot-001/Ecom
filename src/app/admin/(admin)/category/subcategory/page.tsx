@@ -1,5 +1,5 @@
 'use client'
-import { ISubCategoryData, subCategoryData } from '../data/subCategoryData';
+import { ISubCategoryData, subCategoryData } from './data/subCategoryData';
 import { ColumnDef } from '@tanstack/react-table';
 import { Edit3, Trash2 } from 'lucide-react';
 import BaseTable from '@/components/table/BaseTable';

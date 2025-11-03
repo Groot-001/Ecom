@@ -29,11 +29,11 @@ export default function AdminPage() {
 
   const columns: ColumnDef<ICategoryItem>[] = [
     {
-      accessorKey: "id",
       header: "Id",
+      cell: (info) => info.row.index + 1,
     },
     {
-      accessorKey: "name",
+      accessorKey: "name", // This is getting data from the backend like data.name
       header: "Category",
       cell: ({ row }) => (
         <span className="font-medium text-gray-900">
@@ -49,7 +49,7 @@ export default function AdminPage() {
       id: "actions",
       header: " Actions",
       cell: ({ row }) => (
-        <div className="flex gap-3">
+        <div className="flex gap-5">
           <button
             onClick={() => {
               setIsUpdateCategoryOpen(true);
@@ -73,7 +73,7 @@ export default function AdminPage() {
       ),
     },
   ];
-  
+
   return (
     <div>
       <AdminHeader
