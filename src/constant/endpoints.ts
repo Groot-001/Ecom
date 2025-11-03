@@ -5,6 +5,7 @@ export const endpoints = {
   category: {
     create: "/categories",
     list: "/categories",
-    details:"/categories/id"
+    details: "/categories/id",
+    edit: "/categories/edit",
   },
 };
